@@ -1,13 +1,18 @@
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import RepositoryList from './RepositoryList';
-import Text from './Text';
+import SignIn from './SignIn';
+import { Route, Routes, Navigate } from 'react-router-native';
 import AppBar from './AppBar';
 
 const Main = () => {
   return (
     <View>
-      <AppBar></AppBar>
-      <RepositoryList></RepositoryList>
+      <AppBar />
+      <Routes>
+        <Route path="/" element={<RepositoryList />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </View>
   );
 };

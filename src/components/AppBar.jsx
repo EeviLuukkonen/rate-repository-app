@@ -1,23 +1,32 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
 import AppBarTab from './AppBarTab';
+import { Link } from "react-router-native"
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.appBar,
-    justifyContent: 'center',
+    height: 100,
+  },
+  scrollView: {
+    justifyContent: 'space-evenly',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 100,
+    flexGrow: 1,
+    gap: 20,
+    paddingHorizontal: 15,
   }
 });
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab label="Repositories" onPress={() => console.log('Repositories pressed')} />
+      <ScrollView horizontal contentContainerStyle={styles.scrollView}>
+        <AppBarTab label="Repositories" path="/" />
+        <AppBarTab label="Sign in" path="/signin" />
+      </ScrollView>
     </View>
   );
 };
