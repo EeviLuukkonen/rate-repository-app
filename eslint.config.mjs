@@ -18,6 +18,8 @@ const compat = new FlatCompat({
 export default defineConfig([{
     extends: compat.extends("eslint:recommended", "plugin:react/recommended"),
 
+    files: ["**/*.{js,jsx}"],
+
     plugins: {
         react,
         "react-native": reactNative,

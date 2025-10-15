@@ -46,7 +46,7 @@ const formatCount = (count) => {
 }
 
 const StatsComponent = ({label, count}) => (
-  <View>
+  <View style={{alignItems: 'center'}}>
     <Text fontWeight="bold">{formatCount(count)}</Text>
     <Text color="textSecondary">{label}</Text>
   </View>
