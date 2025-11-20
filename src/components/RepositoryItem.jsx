@@ -59,7 +59,7 @@ const LanguageComponent = ({language}) => (
 );
 
 const RepositoryItem = ({item}) => (
-  <View style={styles.container}>
+  <View testID="repositoryItem" style={styles.container}>
 
     <View style={styles.topSection}>
       <Image source={{uri: item.ownerAvatarUrl}} style={styles.avatar} />
