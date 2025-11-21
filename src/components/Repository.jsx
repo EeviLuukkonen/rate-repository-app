@@ -36,11 +36,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryInfo = ({ repository }) => {
-  return (
-    <RepositoryItem item={repository} buttonVisible={true} />
-  )
-};
+const RepositoryInfo = ({ repository }) => (
+  <RepositoryItem item={repository} buttonVisible={true} />
+);
+
 
 const ReviewItem = ({ review }) => {
   return (
@@ -64,6 +63,7 @@ const Repository = () => {
   const { repositoryId } = useParams();
   const { data, loading, error } = useQuery(GET_REPOSITORY, {
     variables: { id: repositoryId },
+    fetchPolicy: 'cache-and-network',
   })
 
   if (loading) {

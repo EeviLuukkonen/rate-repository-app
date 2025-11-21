@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useNavigate } from 'react-router-native';
 
-const styles = StyleSheet.create({
+export const formStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 15, // space inside the box
@@ -63,11 +63,11 @@ export const SignInContainer = ({ onSubmit }) => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={formStyles.container}>
 
       <View style={[
-        styles.inputField,
-        formik.touched.username && formik.errors.username && styles.inputError
+        formStyles.inputField,
+        formik.touched.username && formik.errors.username && formStyles.inputError
       ]}>
         <TextInput
           placeholder="Username"
@@ -76,12 +76,12 @@ export const SignInContainer = ({ onSubmit }) => {
         />
       </View>
       {formik.touched.username && formik.errors.username && (
-        <Text style={styles.errorText}>{formik.errors.username}</Text>
+        <Text style={formStyles.errorText}>{formik.errors.username}</Text>
       )}
 
       <View style={[
-        styles.inputField,
-        formik.touched.password && formik.errors.password && styles.inputError
+        formStyles.inputField,
+        formik.touched.password && formik.errors.password && formStyles.inputError
       ]}>
         <TextInput
           placeholder="Password"
@@ -91,11 +91,11 @@ export const SignInContainer = ({ onSubmit }) => {
         />
       </View>
       {formik.touched.password && formik.errors.password && (
-        <Text style={styles.errorText}>{formik.errors.password}</Text>
+        <Text style={formStyles.errorText}>{formik.errors.password}</Text>
       )}
 
-      <Pressable onPress={formik.handleSubmit} style={styles.button}>
-        <Text style={styles.buttonText}>Sign In</Text>
+      <Pressable onPress={formik.handleSubmit} style={formStyles.button}>
+        <Text style={formStyles.buttonText}>Sign In</Text>
       </Pressable>
     </View>
   )
