@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginBottom: 10,
     gap: 5,
+    flex: 1,
   },
   statsSection: {
     flexDirection: 'row',
