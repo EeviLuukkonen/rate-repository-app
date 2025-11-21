@@ -1,6 +1,7 @@
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, Pressable } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
+import { openURL } from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +34,17 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 4,
     marginTop: 4,
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    padding: 13,
+    borderRadius: 4,
+    alignItems: 'center', // center text horizontally
+    marginTop: 15,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
   }
 });
 
@@ -58,7 +70,7 @@ const LanguageComponent = ({language}) => (
   </View>
 );
 
-const RepositoryItem = ({item}) => (
+const RepositoryItem = ({ item, buttonVisible }) => (
   <View testID="repositoryItem" style={styles.container}>
 
     <View style={styles.topSection}>
@@ -77,8 +89,15 @@ const RepositoryItem = ({item}) => (
       <StatsComponent label="Rating" count={item.ratingAverage} />
       <StatsComponent label="Reviews" count={item.reviewCount} />
     </View>
+
+    {buttonVisible && (
+      <Pressable onPress={() => openURL(item.url)} style={styles.button}>
+        <Text style={styles.buttonText}>Open in GitHub</Text>
+      </Pressable>
+    )}
     
   </View>
 );
+  
 
 export default RepositoryItem

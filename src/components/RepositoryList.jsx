@@ -1,6 +1,8 @@
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
+import { Pressable } from 'react-native';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
@@ -11,16 +13,20 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, onPressRepository }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
-    
+
   return (
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({item}) => <RepositoryItem item={item} />}
+      renderItem={({ item }) => (
+        <Pressable onPress={() => onPressRepository(item.id)}>
+          <RepositoryItem item={item} buttonVisible={false} />
+        </Pressable>
+      )}
       keyExtractor={item => item.id}
     />
   );
@@ -28,8 +34,13 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
+  const navigate = useNavigate();
 
-  return <RepositoryListContainer repositories={repositories} />
+  const onPressRepository = (id) => {
+    navigate(`/${id}`);
+  };
+
+  return <RepositoryListContainer repositories={repositories} onPressRepository={onPressRepository} />
 };
 
 export default RepositoryList;
