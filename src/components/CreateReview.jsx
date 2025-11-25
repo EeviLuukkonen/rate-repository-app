@@ -1,6 +1,6 @@
 import Text from './Text';
 import { useFormik } from 'formik';
-import { View, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, TextInput, Pressable } from 'react-native';
 import { formStyles } from './SignIn';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
@@ -42,8 +42,6 @@ const CreateReview = () => {
       rating: parseInt(values.rating, 10),
       text: values.text,
     };
-
-    console.log('Submitting review:', review);
     
     try {
       const result = await createReview(
@@ -52,8 +50,6 @@ const CreateReview = () => {
       navigate(`/${result.data.createReview.repositoryId}`);
     } catch (e) {
       console.error('Error creating review:', e);
-      console.error('graphQLErrors:', e.graphQLErrors);
-      console.error('networkError:', e.networkError && e.networkError.result);
     }
   };
   

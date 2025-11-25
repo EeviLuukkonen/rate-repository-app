@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.appBar,
-    height: 100,
+    height: 120,
   },
   scrollView: {
     justifyContent: 'space-evenly',
@@ -29,11 +29,16 @@ const AppBar = () => {
   const apolloClient = useApolloClient();
   const navigate = useNavigate();
 
-  const { loading, data } = useQuery(GET_ME, {
+  const { loading, data, error } = useQuery(GET_ME, {
     fetchPolicy: 'cache-and-network',
   });
 
   if (loading) {
+    return <></>;
+  }
+
+  if (error) {
+    console.error(error);
     return <></>;
   }
 
@@ -54,7 +59,10 @@ const AppBar = () => {
         {data.me !== null ? (
           <AppBarTab label="Sign out" onPress={signOut} />
         ) : (
-          <AppBarTab label="Sign in" path="/signin" />
+          <>
+            <AppBarTab label="Sign in" path="/signin" />
+            <AppBarTab label="Sign up" path="/signup" />
+          </>
         )}
       </ScrollView>
     </View>
