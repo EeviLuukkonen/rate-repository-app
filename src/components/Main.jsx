@@ -6,6 +6,7 @@ import { Route, Routes, Navigate } from 'react-router-native';
 import AppBar from './AppBar';
 import Repository from './Repository';
 import CreateReview from './CreateReview';
+import MyReviews from './MyReviews';
 
 const Main = () => {
   return (
@@ -17,6 +18,7 @@ const Main = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path="/createreview" element={<CreateReview />} />
+        <Route path='/myreviews' element={<MyReviews />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

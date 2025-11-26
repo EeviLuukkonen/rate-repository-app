@@ -6,7 +6,7 @@ import { FlatList, View, StyleSheet } from "react-native"
 import Text from "./Text"
 import theme from "../theme"
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   separator: {
     height: 10,
     backgroundColor: '#e1e4e8',
@@ -41,7 +41,7 @@ const RepositoryInfo = ({ repository }) => (
 );
 
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review }) => {
   return (
     <View style={styles.reviewContainer}>
       <View style={styles.ratingContainer}>
