@@ -15,7 +15,16 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryListHeader = ({ selectedOrder, onChangeOrder, menuVisible, openMenu, closeMenu, orderOptions, searchQuery, setSearchQuery }) => (
+const RepositoryListHeader = ({ 
+  selectedOrder, 
+  onChangeOrder, 
+  menuVisible, 
+  openMenu, 
+  closeMenu, 
+  orderOptions, 
+  searchQuery, 
+  setSearchQuery 
+}) => (
   <View>
     <Searchbar
       placeholder="Search"
@@ -39,7 +48,7 @@ const RepositoryListHeader = ({ selectedOrder, onChangeOrder, menuVisible, openM
   </View>
 );
 
-export const RepositoryListContainer = ({ repositories, onPressRepository, headerComponent }) => {
+export const RepositoryListContainer = ({ repositories, onPressRepository, headerComponent, onEndReach }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -55,6 +64,8 @@ export const RepositoryListContainer = ({ repositories, onPressRepository, heade
       )}
       keyExtractor={item => item.id}
       ListHeaderComponent={headerComponent}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 }
@@ -73,17 +84,28 @@ const RepositoryList = () => {
   const openMenu = () => setMenuVisible(true);
   const closeMenu = () => setMenuVisible(false);
 
-  const { repositories } = useRepositories({ ...orderOptions[selectedOrder].value, searchKeyword: searchQuery });
+  const { repositories, fetchMore } = useRepositories({
+    ...orderOptions[selectedOrder].value, 
+    searchKeyword: searchQuery,
+    first: 4,
+  });
+
   const navigate = useNavigate();
 
   const onPressRepository = (id) => {
     navigate(`/${id}`);
   };
 
+  const onEndReach = () => {
+    console.log('End reached, fetching more...');
+    fetchMore();
+  };
+
   return (
     <RepositoryListContainer
       repositories={repositories}
       onPressRepository={onPressRepository}
+      onEndReach={onEndReach}
       headerComponent={
         <RepositoryListHeader 
           selectedOrder={selectedOrder} 
